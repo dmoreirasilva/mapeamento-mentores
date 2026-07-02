@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapeamento Comportamental para Mentores — Diego Moreira</title>
+  <meta name="description" content="Descubra os pontos fortes, pontos cegos e crenças limitantes do seu mentorado. O Mapeamento Comportamental entrega o mapa invisível que transforma sua mentoria.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:    #0A1628;
+      --bg:         #F8F6F1;
+      --surface:    #EDE8DF;
+      --text:       #0A1628;
+      --muted:      #6B7280;
+      --accent:     #C9963D;
+      --line:       #DDD8CF;
+      --white:      #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── TYPOGRAPHY ── */
+    h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; line-height: 1.2; }
+    .eyebrow {
+      font-size: .75rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px; display: block;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-accent {
+      display: inline-block; background: var(--accent); color: var(--primary);
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem;
+      padding: 16px 36px; border-radius: 6px; text-decoration: none;
+      transition: opacity .2s; cursor: pointer; border: none;
+    }
+    .btn-accent:hover { opacity: .88; }
+    .btn-outline {
+      display: inline-block; border: 2px solid var(--accent); color: var(--accent);
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem;
+      padding: 14px 34px; border-radius: 6px; text-decoration: none; transition: all .2s;
+    }
+    .btn-outline:hover { background: var(--accent); color: var(--primary); }
+
+    /* ══════════════════════════════════
+       HERO
+    ══════════════════════════════════ */
+    .hero {
+      background: var(--primary);
+      padding: 100px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 0%, rgba(201,150,61,.12) 0%, transparent 70%);
+    }
+    .hero .eyebrow { color: var(--accent); }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      color: var(--white);
+      max-width: 800px;
+      margin: 0 auto 24px;
+    }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero p {
+      font-size: 1.15rem; color: rgba(255,255,255,.75);
+      max-width: 620px; margin: 0 auto 40px; line-height: 1.75;
+    }
+    .hero-note {
+      font-size: .82rem; color: rgba(255,255,255,.4);
+      margin-top: 16px; display: block;
+    }
+
+    /* ══════════════════════════════════
+       RECOGNITION — dor
+    ══════════════════════════════════ */
+    .recognition { padding: 80px 0; }
+    .recognition .inner {
+      max-width: 760px; margin: 0 auto; text-align: center;
+    }
+    .recognition h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      margin-bottom: 24px;
+    }
+    .recognition p {
+      font-size: 1.05rem; color: var(--muted); margin-bottom: 16px; line-height: 1.8;
+    }
+    .recognition p strong { color: var(--text); }
+    .recognition .destaque {
+      background: var(--surface); border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0; padding: 20px 24px;
+      font-size: 1.05rem; color: var(--text); font-style: italic;
+      margin: 32px 0; text-align: left;
+    }
+
+    /* ══════════════════════════════════
+       PROBLEM — o inimigo invisível
+    ══════════════════════════════════ */
+    .problem { background: var(--surface); padding: 80px 0; }
+    .problem h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      text-align: center; margin-bottom: 48px;
+    }
+    .blocks {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .block-card {
+      background: var(--white); border-radius: 12px; padding: 32px 28px;
+      border-top: 4px solid var(--accent);
+    }
+    .block-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+    .block-card h3 { font-size: 1.15rem; margin-bottom: 12px; }
+    .block-card p { font-size: .92rem; color: var(--muted); line-height: 1.75; }
+
+    /* ══════════════════════════════════
+       SOLUTION — o mapeamento
+    ══════════════════════════════════ */
+    .solution { padding: 80px 0; }
+    .solution-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .solution h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      margin-bottom: 20px;
+    }
+    .solution p { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
+    .solution p strong { color: var(--text); }
+    .dimensions {
+      background: var(--surface); border-radius: 12px; padding: 32px;
+    }
+    .dimensions h3 {
+      font-size: 1rem; font-family: 'Inter', sans-serif; font-weight: 600;
+      margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
+    }
+    .dim-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--line);
+    }
+    .dim-item:last-child { border-bottom: none; }
+    .dim-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    .dim-text strong { display: block; font-size: .92rem; color: var(--text); }
+    .dim-text span { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+
+    /* ══════════════════════════════════
+       DEVOLUTIVA — o que você recebe
+    ══════════════════════════════════ */
+    .devolutiva { background: var(--primary); padding: 80px 0; }
+    .devolutiva .eyebrow { color: var(--accent); }
+    .devolutiva h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      color: var(--white); text-align: center; margin-bottom: 12px;
+    }
+    .devolutiva .sub {
+      text-align: center; color: rgba(255,255,255,.6);
+      font-size: 1rem; margin-bottom: 56px; max-width: 560px; margin-left: auto; margin-right: auto;
+    }
+    .recebi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .recebi-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px; padding: 32px 28px;
+    }
+    .recebi-num {
+      font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--accent);
+      line-height: 1; margin-bottom: 16px; display: block;
+    }
+    .recebi-card h3 { font-size: 1.1rem; color: var(--white); margin-bottom: 10px; }
+    .recebi-card p { font-size: .9rem; color: rgba(255,255,255,.55); line-height: 1.75; }
+
+    /* ══════════════════════════════════
+       HOW IT WORKS
+    ══════════════════════════════════ */
+    .how { padding: 80px 0; background: var(--surface); }
+    .how h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      text-align: center; margin-bottom: 56px;
+    }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .step { text-align: center; }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--accent); color: var(--primary);
+      font-weight: 700; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .step h3 { font-size: 1.05rem; margin-bottom: 10px; }
+    .step p { font-size: .9rem; color: var(--muted); line-height: 1.75; }
+    .step-arrow {
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 1.5rem; margin-top: 26px;
+    }
+
+    /* ══════════════════════════════════
+       AUTHORITY — Diego
+    ══════════════════════════════════ */
+    .authority { padding: 80px 0; }
+    .authority-grid {
+      display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: center;
+    }
+    .authority-img {
+      background: var(--surface); border-radius: 12px;
+      aspect-ratio: 3/4; overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .authority-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+    .authority-content .eyebrow { color: var(--accent); }
+    .authority-content h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 20px;
+    }
+    .authority-content p {
+      font-size: .98rem; color: var(--muted); line-height: 1.85; margin-bottom: 14px;
+    }
+    .authority-content p strong { color: var(--text); }
+    .proofs {
+      display: flex; flex-direction: column; gap: 10px; margin-top: 28px;
+    }
+    .proof-item {
+      display: flex; align-items: flex-start; gap: 10px; font-size: .9rem; color: var(--text);
+    }
+    .proof-item::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    /* ══════════════════════════════════
+       TESTIMONIALS
+    ══════════════════════════════════ */
+    .testimonials { padding: 80px 0; }
+    .testimonials h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); text-align: center; margin-bottom: 12px; }
+    .testimonials .sub { text-align: center; color: var(--muted); font-size: 1rem; margin-bottom: 48px; }
+    .testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .testi-card {
+      background: var(--primary); border-radius: 12px; padding: 32px;
+      color: var(--white); position: relative;
+    }
+    .testi-stars { color: var(--accent); font-size: 15px; letter-spacing: 3px; margin-bottom: 12px; }
+    .testi-source {
+      font-size: .72rem; color: rgba(255,255,255,.35);
+      margin-bottom: 14px; letter-spacing: .5px; text-transform: uppercase; font-weight: 600;
+    }
+    .testi-source a { color: var(--accent); text-decoration: none; margin-left: 4px; opacity: .75; font-size: .68rem; }
+    .testi-source a:hover { opacity: 1; text-decoration: underline; }
+    .testi-quote {
+      font-size: .97rem; line-height: 1.75; color: rgba(255,255,255,.85);
+      font-style: italic; margin-bottom: 24px;
+    }
+    .testi-quote::before { content: '\201C'; color: var(--accent); font-size: 1.4em; line-height: 0; margin-right: 4px; vertical-align: -.1em; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(201,150,61,.2); border: 2px solid rgba(201,150,61,.4);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--accent); font-size: 15px; flex-shrink: 0;
+    }
+    .testi-name { font-weight: 700; font-size: .92rem; }
+    .testi-role { font-size: .78rem; color: rgba(255,255,255,.4); margin-top: 2px; }
+    .testi-result {
+      margin-top: 20px;
+      background: rgba(201,150,61,.1); border-left: 3px solid var(--accent);
+      padding: 10px 14px; border-radius: 0 6px 6px 0;
+      font-size: .82rem; color: var(--accent); font-weight: 600;
+    }
+    .testi-card--video { padding: 0; overflow: hidden; }
+    .testi-card--video .testi-source { padding: 20px 24px 12px; margin-bottom: 0; }
+    .testi-video-wrap { background: #000; border-radius: 0 0 12px 12px; }
+    .testi-video-wrap video { width: 100%; max-height: 460px; object-fit: contain; display: block; }
+    @media (max-width: 768px) { .testi-grid { grid-template-columns: 1fr; } }
+
+    /* ══════════════════════════════════
+       FOR WHOM
+    ══════════════════════════════════ */
+    .for-whom { background: var(--surface); padding: 80px 0; }
+    .for-whom h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      text-align: center; margin-bottom: 48px;
+    }
+    .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .col-card {
+      background: var(--white); border-radius: 12px; padding: 32px;
+    }
+    .col-card h3 { font-size: 1.05rem; margin-bottom: 20px; }
+    .col-card.yes h3 { color: #16a34a; }
+    .col-card.no h3 { color: #dc2626; }
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .check-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .9rem; color: var(--muted); line-height: 1.6;
+    }
+    .check-list li::before { flex-shrink: 0; font-weight: 700; }
+    .col-card.yes .check-list li::before { content: '✓'; color: #16a34a; }
+    .col-card.no  .check-list li::before { content: '✕'; color: #dc2626; }
+
+    /* ══════════════════════════════════
+       CTA FINAL
+    ══════════════════════════════════ */
+    .cta-final {
+      background: var(--primary); padding: 100px 0; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-final::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(201,150,61,.15) 0%, transparent 70%);
+    }
+    .cta-final .eyebrow { color: var(--accent); }
+    .cta-final h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--white); max-width: 700px;
+      margin: 0 auto 20px;
+    }
+    .cta-final h2 em { color: var(--accent); font-style: normal; }
+    .cta-final p {
+      color: rgba(255,255,255,.65); font-size: 1.05rem;
+      max-width: 540px; margin: 0 auto 40px; line-height: 1.8;
+    }
+    .cta-note {
+      font-size: .82rem; color: rgba(255,255,255,.35);
+      margin-top: 16px; display: block;
+    }
+
+    /* ══════════════════════════════════
+       FOOTER
+    ══════════════════════════════════ */
+    footer {
+      background: #060e1c; padding: 32px 0; text-align: center;
+      font-size: .8rem; color: rgba(255,255,255,.3);
+    }
+
+    /* ══════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════ */
+    @media (max-width: 768px) {
+      .blocks, .recebi-grid, .steps, .two-cols { grid-template-columns: 1fr; }
+      .solution-grid, .authority-grid { grid-template-columns: 1fr; gap: 40px; }
+      .authority-img { aspect-ratio: 4/3; }
+      .hero { padding: 72px 0 56px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Para Mentores</span>
+    <h1>O que está travando seu mentorado<br><em>ele mesmo não consegue ver</em></h1>
+    <p>O Mapeamento Comportamental revela os pontos fortes, os pontos cegos e as crenças limitantes que o inconsciente esconde. Com esse mapa, você deixa de adivinhar — e começa a transformar de verdade.</p>
+    <a href="#cta" class="btn-accent">Quero o Mapeamento para meu Mentorado →</a>
+    <span class="hero-note">Análise individual com devolutiva completa por Diego Moreira</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     RECOGNITION
+════════════════════════════════ -->
+<section class="recognition">
+  <div class="container">
+    <div class="inner">
+      <span class="eyebrow">O que nenhum mentor quer admitir</span>
+      <h2>Seu mentorado tem tudo para avançar.<br>E ainda assim, trava.</h2>
+      <p>Você já viu isso antes. O mentorado tem talento, tem vontade, tem acesso ao seu melhor conhecimento — e ainda assim repete os mesmos padrões. Começa bem, perde tração, volta à estaca zero.</p>
+      <p><strong>Não é falta de estratégia. Não é falta de método.</strong> É algo que não aparece em planilha, metas ou check-ins.</p>
+      <div class="destaque">
+        "O problema não está fora dele. Está dentro. E enquanto você não souber o que é, a mentoria vai esbarrar sempre no mesmo teto invisível."
+      </div>
+      <p>As crenças limitantes operam no inconsciente — silenciosas, automáticas e poderosas. Elas sabotam resultados mesmo quando a pessoa sabe exatamente o que precisa fazer. O mentor que não enxerga isso navega no escuro.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     PROBLEM
+════════════════════════════════ -->
+<section class="problem">
+  <div class="container">
+    <h2>Os três entraves invisíveis<br>que nenhuma mentoria convencional detecta</h2>
+    <div class="blocks">
+      <div class="block-card">
+        <span class="block-icon">🕳️</span>
+        <h3>Pontos Cegos</h3>
+        <p>Comportamentos, reações e padrões que o mentorado tem — mas não consegue enxergar em si mesmo. O que está tão naturalizado que se tornou invisível. Sem um olhar externo e estruturado, esses pontos ficam intactos para sempre.</p>
+      </div>
+      <div class="block-card">
+        <span class="block-icon">🔒</span>
+        <h3>Crenças Limitantes</h3>
+        <p>Programações inconscientes que definem o que a pessoa acredita merecer, conseguir e ser. Elas não aparecem nas conversas de mentoria — mas sabotam toda decisão, toda ação, todo avanço. São o freio que a pessoa não sabe que está pisando.</p>
+      </div>
+      <div class="block-card">
+        <span class="block-icon">⚡</span>
+        <h3>Potencial Não Ativado</h3>
+        <p>Forças genuínas que estão ali — mas nunca foram nomeadas, reconhecidas e canalizadas da forma certa. Quando o mentor não sabe quais são os pontos fortes reais do mentorado, trabalha contra a natureza dele sem perceber.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     SOLUTION
+════════════════════════════════ -->
+<section class="solution">
+  <div class="container">
+    <div class="solution-grid">
+      <div>
+        <span class="eyebrow">A solução</span>
+        <h2>O Mapeamento Comportamental que entrega o que a mentoria sozinha não alcança</h2>
+        <p>Desenvolvido com base nas cinco dimensões mais validadas da ciência do comportamento humano, o Mapeamento gera um perfil completo do mentorado — incluindo o que ele mesmo desconhece sobre si.</p>
+        <p><strong>E depois vem a devolutiva.</strong> Diego Moreira analisa os resultados e entrega ao mentor um relatório aprofundado: pontos fortes a potencializar, pontos cegos a trabalhar e as crenças limitantes que precisam ser reprogramadas.</p>
+        <p>Você recebe o mapa. Sua mentoria recebe uma nova dimensão de profundidade.</p>
+      </div>
+      <div class="dimensions">
+        <h3>5 dimensões mapeadas</h3>
+        <div class="dim-item">
+          <span class="dim-icon">🎯</span>
+          <div class="dim-text">
+            <strong>Perfil DISC (Marston)</strong>
+            <span>Como o mentorado se comporta, decide e reage sob pressão — e o que isso revela sobre pontos de força e atrito</span>
+          </div>
+        </div>
+        <div class="dim-item">
+          <span class="dim-icon">🧠</span>
+          <div class="dim-text">
+            <strong>Tipo Psicológico (Jung)</strong>
+            <span>Como processa informações, toma decisões e se relaciona com o mundo — 16 tipos com implicações profundas para a mentoria</span>
+          </div>
+        </div>
+        <div class="dim-item">
+          <span class="dim-icon">⚖️</span>
+          <div class="dim-text">
+            <strong>Hierarquia de Valores (Spranger)</strong>
+            <span>O que realmente move o mentorado no fundo — os valores reais que guiam (ou bloqueiam) suas escolhas</span>
+          </div>
+        </div>
+        <div class="dim-item">
+          <span class="dim-icon">👑</span>
+          <div class="dim-text">
+            <strong>Estilo de Liderança (Hersey & Blanchard)</strong>
+            <span>Como lidera, como precisa ser liderado e onde está o gap entre os dois</span>
+          </div>
+        </div>
+        <div class="dim-item">
+          <span class="dim-icon">🔑</span>
+          <div class="dim-text">
+            <strong>Crenças e Identidade</strong>
+            <span>Capacidade, merecimento, identidade e mentalidade de abundância — o diagnóstico do que o inconsciente pensa sobre o que ele merece e consegue</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     DEVOLUTIVA
+════════════════════════════════ -->
+<section class="devolutiva">
+  <div class="container">
+    <span class="eyebrow" style="display:block;text-align:center">O que você recebe</span>
+    <h2>Três entregas que mudam<br>o nível da sua mentoria</h2>
+    <p class="sub">Não é só um relatório. É um conjunto de informações que você vai usar em cada sessão, em cada intervenção, em cada momento que seu mentorado travar.</p>
+    <div class="recebi-grid">
+      <div class="recebi-card">
+        <span class="recebi-num">01</span>
+        <h3>Mapa dos Pontos Fortes</h3>
+        <p>As forças genuínas do mentorado — identificadas com precisão científica, não por autopercepção. Você saberá exatamente onde apoiar para ele ir mais longe.</p>
+      </div>
+      <div class="recebi-card">
+        <span class="recebi-num">02</span>
+        <h3>Diagnóstico dos Pontos Cegos</h3>
+        <p>Os padrões que o mentorado não enxerga em si mesmo — com contexto de por que existem e como abordá-los na mentoria sem gerar resistência.</p>
+      </div>
+      <div class="recebi-card">
+        <span class="recebi-num">03</span>
+        <h3>Relatório de Crenças Limitantes</h3>
+        <p>As programações inconscientes que sabotam os resultados do mentorado — identificadas, nomeadas e com orientação prática de como o mentor pode trabalhar cada uma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     HOW IT WORKS
+════════════════════════════════ -->
+<section class="how">
+  <div class="container">
+    <h2>Como funciona</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Mentorado faz o teste</h3>
+        <p>Você envia o link do Mapeamento Comportamental para seu mentorado. Ele responde às 64 perguntas em 15 a 20 minutos — pode ser no celular, no computador, no momento que preferir.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Diego analisa e prepara a devolutiva</h3>
+        <p>Com os resultados em mãos, Diego Moreira faz a análise completa — cruzando as cinco dimensões para identificar padrões, contradições e os entraves inconscientes que o próprio mentorado não enxerga.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Você recebe o mapa completo</h3>
+        <p>O relatório completo chega para você — pronto para ser usado na próxima sessão de mentoria. Pontos fortes, pontos cegos, crenças limitantes e orientações práticas de intervenção.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     AUTHORITY
+════════════════════════════════ -->
+<section class="authority">
+  <div class="container">
+    <div class="authority-grid">
+      <div class="authority-img">
+        <img src="https://dmoreirasilva.github.io/instituto-diego-moreira/assets/diego-foto.jpg" alt="Diego Moreira" onerror="this.parentElement.style.background='#EDE8DF'">
+      </div>
+      <div class="authority-content">
+        <span class="eyebrow">Quem faz a devolutiva</span>
+        <h2>Diego Moreira — Major do Exército, hipnoterapeuta e especialista em reprogramação mental</h2>
+        <p>Como Major do Exército Brasileiro, Diego liderou mais de 50 homens — e ainda assim a ansiedade quase destruiu tudo. A liderança. A família. A saúde.</p>
+        <p>O que poderia ter sido o fim virou o início do <strong>Método RESET da Ansiedade</strong>: um sistema de reprogramação mental que Diego testou em si mesmo antes de ensinar a qualquer pessoa.</p>
+        <p>Hoje, como hipnoterapeuta e especialista em crenças limitantes, Diego é o profissional que enxerga o que o próprio cliente não consegue. <strong>Essa capacidade é o que a devolutiva entrega ao mentor.</strong></p>
+        <div class="proofs">
+          <div class="proof-item">Major do Exército Brasileiro — liderou mais de 50 homens</div>
+          <div class="proof-item">Hipnoterapeuta clínico e especialista em reprogramação mental</div>
+          <div class="proof-item">Criador do Método RESET da Ansiedade</div>
+          <div class="proof-item">Mais de 100 líderes atendidos com 100% de resultado garantido</div>
+          <div class="proof-item">Vivência pessoal com burnout — saiu do outro lado e criou o caminho</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════ -->
+<section class="testimonials">
+  <div class="container">
+    <span class="eyebrow" style="display:block;text-align:center">Resultados reais</span>
+    <h2>O que acontece quando as crenças<br>são tratadas na raiz</h2>
+    <p class="sub">Isso é o que a reprogramação do inconsciente entrega — o mesmo processo que o Mapeamento revela e a mentoria potencializa.</p>
+
+    <div class="testi-grid">
+
+      <!-- VÍDEO -->
+      <div class="testi-card testi-card--video">
+        <div class="testi-source">🎥 Depoimento em vídeo</div>
+        <div class="testi-video-wrap">
+          <video controls playsinline preload="metadata">
+            <source src="https://institutodiegomoreira.com.br/videos/depoimento.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <!-- JULIANE — GOOGLE -->
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-source">🔍 Google Meu Negócio <a href="https://g.page/r/CQ902NPfNHEhEAI/review" target="_blank" rel="noopener">verificar ↗</a></div>
+        <p class="testi-quote">Fiz minha segunda sessão e já consigo sentir a ressignificação de traumas e crenças limitantes que me acompanhavam desde a infância. Diego é extremamente comprometido, paciente e cuidadoso durante todo o processo.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">J</div>
+          <div>
+            <div class="testi-name">Juliane Araujo</div>
+            <div class="testi-role">Avaliação Google · 5 estrelas</div>
+          </div>
+        </div>
+        <div class="testi-result">✓ Crenças limitantes ressignificadas desde a 2ª sessão</div>
+      </div>
+
+    </div>
+
+    <div class="testi-grid" style="margin-top:24px">
+
+      <!-- RODRIGO -->
+      <div class="testi-card">
+        <div class="testi-source">💬 WhatsApp</div>
+        <p class="testi-quote">Recebi alta dos remédios de ansiedade hoje! Meu remédio acabou ontem e não senti absolutamente nenhum mal-estar. Você foi uma peça fundamental para essa conquista sobre essa batalha que travo há anos.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div>
+            <div class="testi-name">Rodrigo</div>
+            <div class="testi-role">Cliente · Brasil</div>
+          </div>
+        </div>
+        <div class="testi-result">✓ Alta dos remédios de ansiedade — resultado permanente</div>
+      </div>
+
+      <!-- MAZZALI -->
+      <div class="testi-card">
+        <div class="testi-source">💬 WhatsApp</div>
+        <p class="testi-quote">Tô com a cabeça muito leve, focado, e me sentindo muito forte. É uma sensação que não tinha há muito tempo — e que eu nem sabia que estava faltando.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">M</div>
+          <div>
+            <div class="testi-name">Mazzali</div>
+            <div class="testi-role">Cliente · Brasil</div>
+          </div>
+        </div>
+        <div class="testi-result">✓ Clareza, foco e força de volta</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     FOR WHOM
+════════════════════════════════ -->
+<section class="for-whom">
+  <div class="container">
+    <h2>Este mapeamento é para você?</h2>
+    <div class="two-cols">
+      <div class="col-card yes">
+        <h3>✓ É para você se...</h3>
+        <ul class="check-list">
+          <li>Você é mentor e quer ir além da estratégia — entrar no que realmente bloqueia seu mentorado</li>
+          <li>Percebe que seu mentorado sabe o que fazer mas não consegue fazer</li>
+          <li>Quer uma ferramenta científica para embasar suas intervenções com mais precisão</li>
+          <li>Está disposto a olhar para o inconsciente do mentorado como parte da jornada</li>
+          <li>Quer diferenciar sua mentoria com uma camada que poucos mentores oferecem</li>
+        </ul>
+      </div>
+      <div class="col-card no">
+        <h3>✕ Não é para você se...</h3>
+        <ul class="check-list">
+          <li>Você acredita que só estratégia e planejamento são suficientes para transformar alguém</li>
+          <li>Prefere metodologias superficiais que não exigem aprofundamento</li>
+          <li>Não está disposto a confrontar padrões inconscientes com seu mentorado</li>
+          <li>Busca uma solução genérica que sirva para qualquer pessoa sem análise individual</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CTA FINAL
+════════════════════════════════ -->
+<section class="cta-final" id="cta">
+  <div class="container">
+    <span class="eyebrow">Próximo passo</span>
+    <h2>Dê ao seu mentorado o mapa<br>que ele <em>não tem</em> de si mesmo</h2>
+    <p>Clique abaixo, entre em contato com Diego e solicite o Mapeamento Comportamental para o seu mentorado. A devolutiva completa chega para você — pronta para ser usada.</p>
+    <a href="https://wa.me/5532984254542?text=Ol%C3%A1%20Diego%2C%20sou%20mentor%20e%20quero%20fazer%20o%20Mapeamento%20Comportamental%20para%20meu%20mentorado." class="btn-accent" target="_blank">Quero o Mapeamento para meu Mentorado →</a>
+    <span class="cta-note">Resposta em até 24h · Análise individual com devolutiva completa</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <p>© 2026 Instituto Diego Moreira · Método RESET da Ansiedade · Todos os direitos reservados</p>
+  </div>
+</footer>
+
+</body>
+</html>
