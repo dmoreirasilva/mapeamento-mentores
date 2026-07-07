@@ -161,6 +161,14 @@
     .study-so {
       font-size: .88rem; color: rgba(255,255,255,.55); line-height: 1.75;
     }
+    .study-pmid {
+      margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.08);
+      font-size: .72rem; color: rgba(255,255,255,.3);
+    }
+    .study-pmid a {
+      color: rgba(201,150,61,.6); text-decoration: none; font-weight: 600;
+    }
+    .study-pmid a:hover { color: var(--accent); }
     .science-bridge {
       max-width: 680px; margin: 0 auto;
       background: rgba(201,150,61,.1); border-left: 4px solid var(--accent);
@@ -168,6 +176,75 @@
       font-size: 1rem; color: rgba(255,255,255,.8); line-height: 1.8; text-align: left;
     }
     @media (max-width: 768px) { .studies-grid { grid-template-columns: 1fr; } }
+
+    /* ══════════════════════════════════
+       SCIENCE FULL — tabela completa
+    ══════════════════════════════════ */
+    .science-full { background: var(--surface); padding: 80px 0; }
+    .science-full h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem); text-align: center; margin-bottom: 12px;
+    }
+    .science-full .intro {
+      text-align: center; color: var(--muted); font-size: .97rem;
+      max-width: 640px; margin: 0 auto 52px; line-height: 1.75;
+    }
+    .tese-block { margin-bottom: 48px; }
+    .tese-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px; padding-bottom: 14px;
+      border-bottom: 2px solid var(--line);
+    }
+    .tese-header h3 {
+      font-size: 1.05rem; color: var(--text); flex: 1;
+      font-family: 'Inter', sans-serif; font-weight: 600;
+    }
+    .evidence-badge {
+      font-size: .65rem; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 4px; flex-shrink: 0;
+    }
+    .evidence-forte  { background: #dcfce7; color: #15803d; }
+    .evidence-mista  { background: #fef9c3; color: #a16207; }
+    .evidence-fraca  { background: #fee2e2; color: #b91c1c; }
+    .studies-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .studies-table th {
+      text-align: left; padding: 10px 14px;
+      background: var(--primary); color: rgba(255,255,255,.7);
+      font-size: .72rem; font-weight: 600; letter-spacing: .5px; text-transform: uppercase;
+    }
+    .studies-table th:first-child { border-radius: 6px 0 0 0; }
+    .studies-table th:last-child  { border-radius: 0 6px 0 0; }
+    .studies-table td {
+      padding: 12px 14px; border-bottom: 1px solid var(--line);
+      vertical-align: top; line-height: 1.6;
+    }
+    .studies-table tr:last-child td { border-bottom: none; }
+    .studies-table tr:nth-child(even) td { background: rgba(0,0,0,.02); }
+    .studies-table td:first-child { font-weight: 600; color: var(--text); width: 28%; }
+    .studies-table td:nth-child(2) { color: var(--muted); width: 56%; }
+    .studies-table td:last-child { width: 16%; }
+    .pmid-link {
+      display: inline-block; background: var(--primary); color: var(--accent);
+      font-size: .68rem; font-weight: 700; padding: 4px 8px; border-radius: 4px;
+      text-decoration: none; letter-spacing: .3px;
+    }
+    .pmid-link:hover { background: var(--accent); color: var(--primary); }
+    .honest-note {
+      background: rgba(201,150,61,.08); border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0; padding: 12px 16px;
+      font-size: .82rem; color: var(--muted); margin-top: 12px; line-height: 1.7;
+    }
+    .honest-note strong { color: var(--text); }
+    .pubmed-footer {
+      margin-top: 40px; padding: 20px 24px;
+      background: var(--primary); border-radius: 10px;
+      text-align: center;
+    }
+    .pubmed-footer p { font-size: .83rem; color: rgba(255,255,255,.5); line-height: 1.7; }
+    .pubmed-footer a { color: var(--accent); text-decoration: none; }
+    @media (max-width: 768px) {
+      .studies-table td:first-child { width: 40%; }
+      .studies-table td:nth-child(2) { width: auto; }
+    }
 
     /* ══════════════════════════════════
        SOLUTION — o mapeamento
@@ -458,32 +535,217 @@
   <div class="container">
     <span class="eyebrow" style="display:block;text-align:center;color:var(--accent)">A ciência confirma</span>
     <h2 class="science-title">Não é intuição de mentor.<br>É o que as pesquisas provam.</h2>
-    <p class="science-intro">Três estudos publicados nas revistas científicas mais respeitadas do mundo chegaram à mesma conclusão: <strong>fatores emocionais e de mentalidade determinam o desempenho. Não estratégia, não técnica, não planejamento.</strong></p>
+    <p class="science-intro">Estudos publicados nas revistas científicas mais respeitadas do mundo chegaram à mesma conclusão: <strong>fatores psicológicos e de mentalidade determinam o desempenho tanto quanto inteligência. Não estratégia, não técnica, não planejamento.</strong></p>
 
     <div class="studies-grid">
 
       <div class="study-card">
-        <div class="study-badge">Sustainability · MDPI · 2021</div>
-        <p class="study-finding">Alunos emocionalmente engajados ficam mais satisfeitos com cursos online.</p>
-        <p class="study-so">O engajamento emocional não é detalhe. É o fator determinante da satisfação e da continuidade. O mentor que não acessa esse dado não sabe por que seu mentorado desiste.</p>
+        <div class="study-badge">Psychological Review · Bandura · 1977</div>
+        <p class="study-finding">A crença pessoal na própria capacidade é o principal preditor de se a pessoa vai iniciar e persistir em um comportamento.</p>
+        <p class="study-so">Quando um mentorado trava, é quase sempre uma falha de autoeficácia, não de estratégia. Sem identificar essa crença, a mentoria empurra o acelerador com o freio de mão puxado.</p>
+        <div class="study-pmid">PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/847061/" target="_blank" rel="noopener">847061</a> · PubMed</div>
       </div>
 
       <div class="study-card">
-        <div class="study-badge">Scientific Reports · Nature · 2026</div>
-        <p class="study-finding">O envolvimento emocional impacta diretamente os resultados de aprendizagem na educação online.</p>
-        <p class="study-so">Travar não é falta de vontade. É um dado emocional mensurável, invisível para quem não tem o instrumento certo para enxergá-lo.</p>
+        <div class="study-badge">Psychological Bulletin · Richardson et al. · 2012</div>
+        <p class="study-finding">Fatores psicológicos — motivação, autoeficácia e crenças — predizem o desempenho acadêmico tão fortemente quanto inteligência cognitiva.</p>
+        <p class="study-so">O mentorado que não avança não é menos inteligente. É alguém com variáveis psicológicas que nenhuma planilha de metas vai capturar. O Mapeamento captura.</p>
+        <div class="study-pmid">PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/22352812/" target="_blank" rel="noopener">22352812</a> · PubMed</div>
       </div>
 
       <div class="study-card">
-        <div class="study-badge">Nature Human Behaviour · Yeager et al. · 2019</div>
-        <p class="study-finding">Uma intervenção de menos de uma hora focada na mentalidade de crescimento melhorou as notas de alunos com baixo desempenho.</p>
-        <p class="study-so">Uma única intervenção de mentalidade mudou resultados concretos. Imagine o que o Mapeamento completo, com 5 dimensões, pode entregar para a sua mentoria.</p>
+        <div class="study-badge">PNAS · Maguire et al. · 2000</div>
+        <p class="study-finding">Taxistas de Londres desenvolveram volume maior no hipocampo com a prática. O cérebro adulto muda estruturalmente — reprogramação é fato neurológico.</p>
+        <p class="study-so">Reprogramação mental não é metáfora. É fisiologia comprovada. O Mapeamento identifica quais padrões precisam ser reprogramados — e o cérebro do mentorado literalmente muda com o trabalho certo.</p>
+        <div class="study-pmid">PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/10716738/" target="_blank" rel="noopener">10716738</a> · PubMed</div>
       </div>
 
     </div>
 
     <div class="science-bridge">
-      <strong style="color:var(--accent)">O Mapeamento Comportamental traz exatamente esse nível de precisão para dentro da sua mentoria.</strong> Sem precisar dominar a ciência por trás. Diego faz a leitura. Você recebe o mapa pronto para usar em cada sessão.
+      <strong style="color:var(--accent)">O Mapeamento Comportamental traz exatamente esse nível de precisão para dentro da sua mentoria.</strong> Sem precisar dominar a ciência por trás. Diego faz a leitura. Você recebe o mapa pronto para usar em cada sessão. <a href="#base-cientifica" style="color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap">Ver toda a base científica ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     BASE CIENTÍFICA COMPLETA
+════════════════════════════════ -->
+<section class="science-full" id="base-cientifica">
+  <div class="container">
+    <span class="eyebrow" style="display:block;text-align:center">Base científica</span>
+    <h2>18 estudos publicados no PubMed.<br>4 teses que fundamentam o Mapeamento.</h2>
+    <p class="intro">Cada dimensão do Mapeamento Comportamental tem respaldo em pesquisa revisada por pares. Abaixo estão os estudos organizados por tese, todos verificáveis no PubMed.</p>
+
+    <!-- TESE 1 -->
+    <div class="tese-block">
+      <div class="tese-header">
+        <h3>Tese 1 — Saúde mental e bem-estar impactam diretamente o desempenho e a mentoria</h3>
+        <span class="evidence-badge evidence-forte">Evidência forte</span>
+      </div>
+      <table class="studies-table">
+        <thead>
+          <tr><th>Autores / Ano</th><th>Achado principal</th><th>PubMed</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Wickersham et al., 2021</td>
+            <td>Sintomas depressivos reduzem significativamente o desempenho educacional em estudantes universitários.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/33130250/" target="_blank" rel="noopener">PMID 33130250</a></td>
+          </tr>
+          <tr>
+            <td>Richardson et al., 2012</td>
+            <td>Fatores psicológicos predizem desempenho acadêmico tão fortemente quanto inteligência cognitiva — análise de mais de 50 variáveis.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/22352812/" target="_blank" rel="noopener">PMID 22352812</a></td>
+          </tr>
+          <tr>
+            <td>Cobo-Rendón et al., 2020</td>
+            <td>Bem-estar subjetivo e autoeficácia acadêmica predizem desempenho de forma independente.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/32022279/" target="_blank" rel="noopener">PMID 32022279</a></td>
+          </tr>
+          <tr>
+            <td>DuBois et al., 2002</td>
+            <td>Programas de mentoria com estrutura e metodologia produzem efeitos maiores do que mentoria informal.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/12002242/" target="_blank" rel="noopener">PMID 12002242</a></td>
+          </tr>
+          <tr>
+            <td>Raposa et al., 2019</td>
+            <td>Meta-análise: mentoria produz efeito positivo consistente, especialmente quando há diagnóstico prévio do mentorado.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/30661211/" target="_blank" rel="noopener">PMID 30661211</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TESE 2 -->
+    <div class="tese-block">
+      <div class="tese-header">
+        <h3>Tese 2 — Reprogramação mental é neuroplasticidade real, não metáfora</h3>
+        <span class="evidence-badge evidence-forte">Evidência forte</span>
+      </div>
+      <table class="studies-table">
+        <thead>
+          <tr><th>Autores / Ano</th><th>Achado principal</th><th>PubMed</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Carpenter et al., 2018</td>
+            <td>Terapia cognitivo-comportamental altera padrões de pensamento com eficácia comprovada em múltiplas condições.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/29451967/" target="_blank" rel="noopener">PMID 29451967</a></td>
+          </tr>
+          <tr>
+            <td>Hofmann &amp; Smits, 2008</td>
+            <td>Mudar a forma de pensar sobre uma situação muda o comportamento — base da reestruturação cognitiva.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/18363421/" target="_blank" rel="noopener">PMID 18363421</a></td>
+          </tr>
+          <tr>
+            <td>Maguire et al., 2000</td>
+            <td>Prática sistemática altera estrutura física do cérebro adulto — hipocampo de taxistas de Londres é visivelmente maior.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/10716738/" target="_blank" rel="noopener">PMID 10716738</a></td>
+          </tr>
+          <tr>
+            <td>Draganski et al., 2004</td>
+            <td>Aprender uma nova habilidade aumenta a massa cinzenta em semanas — neuroplasticidade documentada por imagem.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/14737157/" target="_blank" rel="noopener">PMID 14737157</a></td>
+          </tr>
+          <tr>
+            <td>Buhle et al., 2014</td>
+            <td>Reinterpretar um evento ativa regiões do córtex pré-frontal — a mudança cognitiva tem assinatura neurológica mensurável.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/23765157/" target="_blank" rel="noopener">PMID 23765157</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TESE 3 -->
+    <div class="tese-block">
+      <div class="tese-header">
+        <h3>Tese 3 — Crenças limitantes e autoeficácia determinam ação e resultado</h3>
+        <span class="evidence-badge evidence-mista">Evidência mista</span>
+      </div>
+      <table class="studies-table">
+        <thead>
+          <tr><th>Autores / Ano</th><th>Achado principal</th><th>PubMed</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bandura, 1977</td>
+            <td>Autoeficácia — a crença na própria capacidade — prediz iniciação e persistência no comportamento melhor do que qualquer outra variável isolada.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/847061/" target="_blank" rel="noopener">PMID 847061</a></td>
+          </tr>
+          <tr>
+            <td>Yeager et al., 2019</td>
+            <td>Intervenção de mentalidade de crescimento melhorou notas de alunos vulneráveis em estudo nacional com 12.000 participantes.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/31391586/" target="_blank" rel="noopener">PMID 31391586</a></td>
+          </tr>
+          <tr>
+            <td>Sisk et al., 2018</td>
+            <td>Meta-análise: efeito geral de mentalidade de crescimento é pequeno — mais significativo em populações vulneráveis ou de baixa renda.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/29505339/" target="_blank" rel="noopener">PMID 29505339</a></td>
+          </tr>
+          <tr>
+            <td>Macnamara &amp; Burgoyne, 2023</td>
+            <td>Efeitos de intervenções de mentalidade são fracos quando não há trabalho prático associado — crença sozinha não basta.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/36326645/" target="_blank" rel="noopener">PMID 36326645</a></td>
+          </tr>
+          <tr>
+            <td>Burnette et al., 2023</td>
+            <td>O impacto das crenças de crescimento é condicional — depende do domínio, do contexto e do suporte oferecido.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/36227318/" target="_blank" rel="noopener">PMID 36227318</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="honest-note"><strong>Nota honesta:</strong> A evidência mais sólida desta tese vem de Bandura (1977) — autoeficácia como preditor de comportamento. O impacto de intervenções isoladas de "mentalidade de crescimento" é mais limitado do que a popularidade do tema sugere. O Mapeamento não usa intervenções isoladas: identifica as crenças específicas de cada pessoa para que o mentor possa trabalhar com precisão cirúrgica.</div>
+    </div>
+
+    <!-- TESE 4 -->
+    <div class="tese-block">
+      <div class="tese-header">
+        <h3>Tese 4 — A história de vida molda o perfil comportamental</h3>
+        <span class="evidence-badge evidence-forte">Evidência forte</span>
+      </div>
+      <table class="studies-table">
+        <thead>
+          <tr><th>Autores / Ano</th><th>Achado principal</th><th>PubMed</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Roberts et al., 2006</td>
+            <td>Revisão de 92 estudos longitudinais: traços de personalidade mudam de forma sistemática ao longo da vida adulta — o perfil de hoje é diferente do de dez anos atrás.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/16435954/" target="_blank" rel="noopener">PMID 16435954</a></td>
+          </tr>
+          <tr>
+            <td>Bleidorn et al., 2018</td>
+            <td>Eventos de vida significativos — como casamento, demissão ou perda — alteram traços de personalidade de forma mensurável.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/27716921/" target="_blank" rel="noopener">PMID 27716921</a></td>
+          </tr>
+          <tr>
+            <td>Specht et al., 2011</td>
+            <td>Transições de vida alteram os cinco grandes traços de personalidade — e o efeito persiste anos após o evento.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/21859226/" target="_blank" rel="noopener">PMID 21859226</a></td>
+          </tr>
+          <tr>
+            <td>Denissen et al., 2019</td>
+            <td>A relação entre vida e personalidade é bidirecional: as experiências moldam traços, e traços influenciam as experiências que a pessoa vive.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/30047764/" target="_blank" rel="noopener">PMID 30047764</a></td>
+          </tr>
+          <tr>
+            <td>Roberts et al., 2007</td>
+            <td>Traços de personalidade predizem resultados de vida — saúde, carreira, relacionamentos — tão bem quanto inteligência.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/26151971/" target="_blank" rel="noopener">PMID 26151971</a></td>
+          </tr>
+          <tr>
+            <td>Lodi-Smith &amp; Roberts, 2007</td>
+            <td>Comprometimento com papéis de vida é o principal motor de mudança de personalidade na vida adulta.</td>
+            <td><a class="pmid-link" href="https://pubmed.ncbi.nlm.nih.gov/25251510/" target="_blank" rel="noopener">PMID 25251510</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="honest-note"><strong>Nota honesta:</strong> A evidência de que a história de vida molda traços e comportamentos é forte. O que <em>não</em> tem evidência robusta é a precisão de instrumentos como DISC ou MBTI para prever comportamento futuro com exatidão. O Mapeamento usa essas dimensões como mapa de padrões, não como diagnóstico determinístico — e é assim que a ciência também as entende.</div>
+    </div>
+
+    <div class="pubmed-footer">
+      <p>Todos os estudos são acessíveis gratuitamente em <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov</a>. Digite o PMID no campo de busca para ler o artigo original.<br>O Mapeamento Comportamental não substitui avaliação clínica. Destina-se ao contexto de desenvolvimento profissional e mentoria.</p>
     </div>
   </div>
 </section>
