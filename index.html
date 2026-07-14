@@ -437,6 +437,48 @@
     .col-card.no  .check-list li::before { content: '✕'; color: #dc2626; }
 
     /* ══════════════════════════════════
+       PARCERIA ECOSSISTEMA
+    ══════════════════════════════════ */
+    .partnership { background: var(--bg); padding: 80px 0; }
+    .partnership .eyebrow { text-align: center; }
+    .partnership h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      text-align: center; margin-bottom: 16px;
+    }
+    .partnership h2 em { color: var(--accent); font-style: normal; }
+    .partnership .partnership-intro {
+      max-width: 720px; margin: 0 auto 48px; text-align: center;
+      color: var(--muted); font-size: 1.05rem;
+    }
+    .partnership-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px; margin-bottom: 48px;
+    }
+    .partnership-card {
+      background: var(--white); border-radius: 12px; padding: 32px;
+      border-top: 4px solid var(--accent);
+    }
+    .partnership-card .p-step-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2rem; color: var(--accent); font-weight: 600;
+      display: block; margin-bottom: 12px;
+    }
+    .partnership-card h3 { font-size: 1.05rem; margin-bottom: 12px; }
+    .partnership-card p { font-size: .9rem; color: var(--muted); line-height: 1.6; }
+    .partnership-pilot {
+      background: var(--primary); border-radius: 12px;
+      padding: 40px 36px; text-align: center;
+    }
+    .partnership-pilot h3 {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--white); margin-bottom: 12px;
+    }
+    .partnership-pilot h3 em { color: var(--accent); font-style: normal; }
+    .partnership-pilot p {
+      color: rgba(248,246,241,.8); max-width: 640px;
+      margin: 0 auto 24px; font-size: .95rem;
+    }
+
+    /* ══════════════════════════════════
        CTA FINAL
     ══════════════════════════════════ */
     .cta-final {
@@ -1005,6 +1047,39 @@
           <li>Busca uma solução genérica que sirva para qualquer pessoa sem análise individual</li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     PARCERIA ECOSSISTEMA
+════════════════════════════════ -->
+<section class="partnership" id="parceria">
+  <div class="container">
+    <span class="eyebrow">Parceria para mentores</span>
+    <h2>Parceria para o <em>seu ecossistema</em></h2>
+    <p class="partnership-intro">Se você tem mastermind, comunidade ou programa de mentoria, existe um número que ninguém te mostra: 20 a 40% dos seus mentorados sabem o que fazer — e não fazem. O problema não é o seu método. É o padrão comportamental que trava a execução. Essa camada é a minha especialidade.</p>
+    <div class="partnership-grid">
+      <div class="partnership-card">
+        <span class="p-step-num">1</span>
+        <h3>Mapeamento na entrada do seu programa</h3>
+        <p>Cada mentorado passa pelo Mapeamento Comportamental. Você recebe o relatório individual — qual padrão trava, qual medo dirige, como conduzir cada perfil — e mentora com precisão cirúrgica.</p>
+      </div>
+      <div class="partnership-card">
+        <span class="p-step-num">2</span>
+        <h3>Workshop ou imersão com seu grupo</h3>
+        <p>Levo para o seu mastermind ou imersão o conteúdo que os mentorados não encontram em outro lugar: como o sistema nervoso de um líder decide antes dele. Conteúdo premium para o seu evento, autoridade para o seu programa.</p>
+      </div>
+      <div class="partnership-card">
+        <span class="p-step-num">3</span>
+        <h3>Casos clínicos, eu assumo</h3>
+        <p>Quando a ansiedade é o que trava o mentorado, eu trato direto com o Método RESET. Ele destrava, executa o seu método — e o resultado vira depoimento do seu programa.</p>
+      </div>
+    </div>
+    <div class="partnership-pilot">
+      <h3>Comece com um piloto <em>sem custo</em></h3>
+      <p>Escolha 3 a 5 mentorados travados. Eu aplico o mapeamento, entrego os relatórios e você comprova o resultado no seu próprio ecossistema — antes de qualquer conversa comercial. Você indica os nomes; agenda, aplicação e devolutivas são por minha conta.</p>
+      <a href="https://wa.me/5532984254542?text=Ol%C3%A1%20Diego%2C%20sou%20mentor%20e%20quero%20conversar%20sobre%20a%20parceria%20para%20o%20meu%20ecossistema." class="btn-accent" target="_blank">Quero a parceria para meu ecossistema →</a>
     </div>
   </div>
 </section>
